@@ -69,6 +69,15 @@ class TestRoom < MiniTest::Test
     assert_equal(expected, actual)
   end
 
+  def test_add_multiple_guests_to_room
+    #add guest1 and guest2 to empty room
+    expected = 2
+    @room1.add_guest(@guest1)
+    @room1.add_guest(@guest2)
+    actual = @room1.guest_count()
+    assert_equal(expected, actual)
+  end
+
   # def test_room_has_two_guests_and_two_songs
   #
   # end
