@@ -21,7 +21,8 @@ class TestRoom < MiniTest::Test
     @song2 = Song.new("Park Life")
     @songs = [@song1, @song2]
     @room3 = Room.new(3, @no_guests, @songs)
-    #setup to add guest
+    #extra song
+    @song3 = Song.new("Bohemian Rhapsody")
     # @room4 = Room.new(4, 0, 0)
   end
 
@@ -63,23 +64,32 @@ class TestRoom < MiniTest::Test
 
   def test_add_guest_to_room
     #add guest1 to empty room
-    expected = 1
     @room1.add_guest(@guest1)
+    expected = 1
     actual = @room1.guest_count()
     assert_equal(expected, actual)
   end
 
   def test_add_multiple_guests_to_room
     #add guest1 and guest2 to empty room
-    expected = 2
     @room1.add_guest(@guest1)
     @room1.add_guest(@guest2)
+    expected = 2
     actual = @room1.guest_count()
     assert_equal(expected, actual)
   end
 
-  # def test_room_has_two_guests_and_two_songs
-  #
-  # end
+  def test_count_songs_in_room
+    assert_equal(0, @room2.song_count())
+  end
 
+  def test_add_songs_to_room
+    #add 3 songs to room with 2 guests
+    @room2.add_song(@song1)
+    @room2.add_song(@song2)
+    @room2.add_song(@song3)
+    expected = 3
+    actual = @room2.song_count()
+    assert_equal(expected, actual)
+  end
 end
