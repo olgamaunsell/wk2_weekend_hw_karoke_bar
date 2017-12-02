@@ -10,21 +10,26 @@ class TestRoom < MiniTest::Test
     #setup to test zero guests and zero songs in room
     @no_guests = []
     @no_songs = []
-    @room1 = Room.new(1, @no_guests, @no_songs)
+    @room1 = Room.new(1, @no_guests, @no_songs, 3)
     #setup to test guests in room
     @guest1 = Guest.new("Jimmy Carr")
     @guest2 = Guest.new("Graham Norton")
     @guests = [@guest1, @guest2]
-    @room2 = Room.new(2, @guests, @no_songs)
+    @room2 = Room.new(2, @guests, @no_songs, 3)
     #setup to test songs in room
     @song1 = Song.new("I want to break free")
     @song2 = Song.new("Park Life")
     @songs = [@song1, @song2]
-    @room3 = Room.new(3, @no_guests, @songs)
-    #extra setup
+    @room3 = Room.new(3, @no_guests, @songs, 3)
+    #setup of room of 2 guests and 3 songs
     @song3 = Song.new("Bohemian Rhapsody")
     @songs_room4 = [@song1, @song2, @song3]
-    @room4 = Room.new(4, @guests, @songs_room4)
+    @room4 = Room.new(4, @guests, @songs_room4, 3)
+    #extra setup to check room capacity
+    @guests_room5 = [@guest1, @guest2, @guest3]
+    @room5 = Room.new(5, @guests_room5, @songs, 3)
+    @guest3 = Guest.new("Jonathan Ross")
+    @guest4 = Guest.new("Graham Norton")
   end
 
   def test_get_room_number
@@ -117,5 +122,32 @@ class TestRoom < MiniTest::Test
     assert_equal(expected,@room4.guests)
     #check songs removed from room list
     assert_equal(expected,@room4.songs)
+  end
+
+  def test_check_room_capacity__spaces_available
+    # test method returns number of spaces available
+
+    expected = 1
+    actual = @room4.room_capacity()
+    assert_equal(expected, actual)
+  end
+
+  def test_check_room_capacity__room_full
+    # test method returns 0 spaces available
+    expected = 0
+    actual = @room5.room_capacity()
+    assert_equal(expected, actual)
+  end
+
+  def test_check_add_guests__reached_capacity
+    @room4.add_guest(@guest3)
+    expected = 3
+    actual = @room4.guest_count()
+    assert_equal(expected, actual)
+    #check guest4 can't be added as capacity reached
+    @room4.add_guest(@guest4)
+    expected = 3
+    actual = @room4.guest_count()
+    assert_equal(expected, actual)
   end
 end
