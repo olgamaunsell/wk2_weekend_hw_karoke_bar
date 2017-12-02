@@ -92,4 +92,18 @@ class TestRoom < MiniTest::Test
     actual = @room2.song_count()
     assert_equal(expected, actual)
   end
+
+  def test_remove_guest_from_room
+    #remove guest2 from room with 2 guests
+    @room2.remove_guest(@guest2)
+    expected = [@guest1]
+    assert_equal(expected, @room2.guests)
+  end
+
+  def test_remove_song_from_room
+    #remove song1 from room with 2 songs
+    @room3.remove_song(@song1)
+    expected = [@song2]
+    assert_equal(expected, @room3.songs)
+  end
 end
