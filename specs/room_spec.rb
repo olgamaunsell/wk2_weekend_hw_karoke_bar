@@ -21,9 +21,10 @@ class TestRoom < MiniTest::Test
     @song2 = Song.new("Park Life")
     @songs = [@song1, @song2]
     @room3 = Room.new(3, @no_guests, @songs)
-    #extra song
+    #extra setup
     @song3 = Song.new("Bohemian Rhapsody")
-    # @room4 = Room.new(4, 0, 0)
+    @songs_room4 = [@song1, @song2, @song3]
+    @room4 = Room.new(4, @guests, @songs_room4)
   end
 
   def test_get_room_number
@@ -105,5 +106,16 @@ class TestRoom < MiniTest::Test
     @room3.remove_song(@song1)
     expected = [@song2]
     assert_equal(expected, @room3.songs)
+  end
+
+  def test_room_vacated
+    # Test to check method that removes all guests
+    # and songs from room
+    @room4.room_vacated()
+    #check guests removed from room list
+    expected = []
+    assert_equal(expected,@room4.guests)
+    #check songs removed from room list
+    assert_equal(expected,@room4.songs)
   end
 end
