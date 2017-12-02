@@ -12,8 +12,8 @@ class TestRoom < MiniTest::Test
     @no_songs = []
     @room1 = Room.new(1, @no_guests, @no_songs, 3)
     #setup to test guests in room
-    @guest1 = Guest.new("Jimmy Carr")
-    @guest2 = Guest.new("Graham Norton")
+    @guest1 = Guest.new("Jimmy Carr",50)
+    @guest2 = Guest.new("Graham Norton",50)
     @guests = [@guest1, @guest2]
     @room2 = Room.new(2, @guests, @no_songs, 3)
     #setup to test songs in room
@@ -28,8 +28,10 @@ class TestRoom < MiniTest::Test
     #extra setup to check room capacity
     @guests_room5 = [@guest1, @guest2, @guest3]
     @room5 = Room.new(5, @guests_room5, @songs, 3)
-    @guest3 = Guest.new("Jonathan Ross")
-    @guest4 = Guest.new("Graham Norton")
+    @guest3 = Guest.new("Jonathan Ross",50)
+    @guest4 = Guest.new("Graham Norton",50)
+    #Guest with less money than default room person fee of $10
+    @guest_not_enough_cash = Guest.new("Blondie", 8)
   end
 
   def test_get_room_number
@@ -140,7 +142,9 @@ class TestRoom < MiniTest::Test
   end
 
   def test_check_add_guests__reached_capacity
+    binding.pry
     @room4.add_guest(@guest3)
+    binding.pry
     expected = 3
     actual = @room4.guest_count()
     assert_equal(expected, actual)
@@ -149,5 +153,16 @@ class TestRoom < MiniTest::Test
     expected = 3
     actual = @room4.guest_count()
     assert_equal(expected, actual)
+  end
+
+  def test_check_add_guest__insufficient_funds
+    binding.pry
+    @room2.add_guest(@guest_not_enough_cash )
+    binding.pry
+    expected = 2
+    actual = @room2.guest_count()
+    assert_equal(expected, actual)
+    assert_equal(8, @guest_not_enough_cash.wallet)
+  
   end
 end
