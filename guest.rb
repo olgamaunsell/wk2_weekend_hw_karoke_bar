@@ -21,7 +21,6 @@ class Guest
 
   # def favourite_song(room)
   #   if room.song_match?(@favourite_song) == true
-  #     print "woo hoo"
   #     return "woo hoo"
   #   end
   #   # return "Woo hoo" if @favourite_song == song
