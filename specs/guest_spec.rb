@@ -6,8 +6,8 @@ require_relative("../room.rb")
 class TestGuest < MiniTest::Test
 
   def setup
-    @guest = Guest.new("Jimmy Choo", 50)
-    @guest2 = Guest.new("Jimmy Choo", 8)
+    @guest = Guest.new("Jimmy Choo", 50, nil)
+    @guest2 = Guest.new("Jimmy Choo", 8, nil)
     @room = Room.new(1, [], [], 3)
   end
 

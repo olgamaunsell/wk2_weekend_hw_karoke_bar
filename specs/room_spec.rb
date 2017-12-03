@@ -12,8 +12,8 @@ class TestRoom < MiniTest::Test
     @no_songs = []
     @room1 = Room.new(1, @no_guests, @no_songs, 3)
     #setup to test guests in room
-    @guest1 = Guest.new("Jimmy Carr",50)
-    @guest2 = Guest.new("Graham Norton",50)
+    @guest1 = Guest.new("Jimmy Carr",50, nil)
+    @guest2 = Guest.new("Graham Norton",50, nil)
     @guests = [@guest1, @guest2]
     @room2 = Room.new(2, @guests, @no_songs, 3)
     #setup to test songs in room
@@ -28,10 +28,11 @@ class TestRoom < MiniTest::Test
     #extra setup to check room capacity
     @guests_room5 = [@guest1, @guest2, @guest3]
     @room5 = Room.new(5, @guests_room5, @songs, 3)
-    @guest3 = Guest.new("Jonathan Ross",50)
-    @guest4 = Guest.new("Graham Norton",50)
+    @fav_song = "I want to break free"
+    @guest3 = Guest.new("Jonathan Ross",50, @fav_song)
+    @guest4 = Guest.new("Graham Norton",50, @fav_song)
     #Guest with less money than default room person fee of $10
-    @guest_not_enough_cash = Guest.new("Blondie", 8)
+    @guest_not_enough_cash = Guest.new("Blondie", 8, nil)
   end
 
   def test_get_room_number
@@ -64,6 +65,18 @@ class TestRoom < MiniTest::Test
 
   def test_get_first_song_in_songs
     assert_equal("I want to break free", @room3.songs.first().name())
+  end
+
+  def test_song_match__true
+    find_song = "I want to break free"
+    #returns true if song found
+    assert_equal(true, @room3.song_match?(find_song))
+  end
+
+  def test_song_match__false
+    find_song = "We are the champions"
+    #returns false if song not found
+    assert_equal(false, @room3.song_match?(find_song))
   end
 
   def test_count_guests_in_room
@@ -142,9 +155,8 @@ class TestRoom < MiniTest::Test
   end
 
   def test_check_add_guests__reached_capacity
-    binding.pry
+
     @room4.add_guest(@guest3)
-    binding.pry
     expected = 3
     actual = @room4.guest_count()
     assert_equal(expected, actual)
@@ -156,13 +168,14 @@ class TestRoom < MiniTest::Test
   end
 
   def test_check_add_guest__insufficient_funds
-    binding.pry
     @room2.add_guest(@guest_not_enough_cash )
-    binding.pry
     expected = 2
     actual = @room2.guest_count()
     assert_equal(expected, actual)
     assert_equal(8, @guest_not_enough_cash.wallet)
-  
+
   end
+
+
+  # binding.pry
 end
