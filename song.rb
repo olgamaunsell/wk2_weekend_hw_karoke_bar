@@ -1,10 +1,11 @@
 class Song
 
-  attr_reader :name, :artist
+  attr_reader :name
 
-  def initialize(name, artist)
+  def initialize(name)
     @name = name
-    @artist
+    # future functionality add artist to allow to search by
+    # @artist
   end
 
   def get_song_name

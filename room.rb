@@ -63,5 +63,11 @@ class Room
     return spaces = @capacity - guest_count
   end
 
+  def serve_guest(guest_tab, menu_item)
+    #Assume that each guest will have a bar tab
+    #Future extension would provide option to pay as you go
 
+    item_price = menu_item.price
+    guest_tab.increment_balance(item_price)
+  end
 end

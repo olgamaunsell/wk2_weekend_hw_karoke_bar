@@ -3,6 +3,8 @@ require ("MiniTest/rg")
 require_relative("../room.rb")
 require_relative("../song.rb")
 require_relative("../guest.rb")
+require_relative("../guest_tab.rb")
+require_relative("../menu.rb")
 
 class TestRoom < MiniTest::Test
 
@@ -33,6 +35,9 @@ class TestRoom < MiniTest::Test
     @guest4 = Guest.new("Graham Norton",50, @fav_song)
     #Guest with less money than default room person fee of $10
     @guest_not_enough_cash = Guest.new("Blondie", 8, nil)
+    #
+    @menu_item = Menu.new("Heineken", 5)
+    @guest_tab = GuestTab.new("Jimmy Carr", 2)
   end
 
   def test_get_room_number
@@ -176,6 +181,16 @@ class TestRoom < MiniTest::Test
 
   end
 
+  def test_serve_guest__bar_tab_incremented
 
-  # binding.pry
+    @room2.serve_guest(@guest_tab, @menu_item)
+    assert_equal(7, @guest_tab.balance)
+
+  end
+
+  # def test_serve_guest__no_bar_tab
+  #
+  # end
+
+
 end

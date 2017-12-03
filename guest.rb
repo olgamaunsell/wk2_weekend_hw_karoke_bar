@@ -9,6 +9,10 @@ class Guest
     @favourite_song = favourite_song || nil
   end
 
+  def get_guest_name
+    return @name
+  end
+  
   def sufficient_funds?(item)
     return wallet >= item.price()
   end
