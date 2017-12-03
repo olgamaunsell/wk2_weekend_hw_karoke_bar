@@ -16,4 +16,10 @@ class TestGuestTab < MiniTest::Test
   def test_get_guest_tab_balance
     assert_equal(5, @guest_tab.balance)
   end
+
+  def test_increment_balance
+    @guest_tab.increment_balance(6)
+    assert_equal(11, @guest_tab.balance)
+  end
+
 end

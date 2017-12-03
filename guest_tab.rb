@@ -7,4 +7,8 @@ class GuestTab
     @balance = balance
   end
 
+  def increment_balance(amount)
+    @balance += amount
+  end
+
 end
