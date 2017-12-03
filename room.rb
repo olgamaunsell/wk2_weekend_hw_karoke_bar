@@ -38,7 +38,9 @@ class Room
     #Create array of song names
     song_names = @songs.map { |song| song.name }
     #check if favourite song is included in list of room songs
-    return song_names.include?(fav_song)
+    if song_names.include?(fav_song)
+      return "woo hoo !"
+    end
   end
 
   def add_song(song)

@@ -1,3 +1,4 @@
+require('pry')
 class Guest
 
   attr_reader :name, :wallet, :favourite_song
@@ -18,7 +19,11 @@ class Guest
     end
   end
 
-  def favourite_song(song)
-    return "Woo hoo" if @favourite_song == song
-  end
+  # def favourite_song(room)
+  #   if room.song_match?(@favourite_song) == true
+  #     print "woo hoo"
+  #     return "woo hoo"
+  #   end
+  #   # return "Woo hoo" if @favourite_song == song
+  # end
 end

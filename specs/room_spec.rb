@@ -67,16 +67,16 @@ class TestRoom < MiniTest::Test
     assert_equal("I want to break free", @room3.songs.first().name())
   end
 
-  def test_song_match__true
+  def test_song_match__returns_woo_hoo
     find_song = "I want to break free"
     #returns true if song found
-    assert_equal(true, @room3.song_match?(find_song))
+    assert_equal("woo hoo !", @room3.song_match?(find_song))
   end
 
-  def test_song_match__false
+  def test_no_song_match__returns_nil
     find_song = "We are the champions"
     #returns false if song not found
-    assert_equal(false, @room3.song_match?(find_song))
+    assert_nil(@room3.song_match?(find_song))
   end
 
   def test_count_guests_in_room
