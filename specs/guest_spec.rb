@@ -25,9 +25,8 @@ class TestGuest < MiniTest::Test
   end
 
   def test_pay_room_fee__sufficient_funds
-      binding.pry
+
     @guest.pay_room_fee(@room)
-      binding.pry
     expected = 40
     actual = @guest.wallet
     assert_equal(expected, actual)
@@ -40,13 +39,13 @@ class TestGuest < MiniTest::Test
     assert_equal(expected, actual)
   end
 
-  # def test_favourite_song_in_room__match
-  #
-  #  binding.pry
-  #   expected = "woo hoo"
-  #   actual = @guest2.favourite_song(@room2)
-  #
-  #  binding.pry
-  #   assert_equal(expected, actual)
-  # end
+  def test_favourite_song_in_room__match
+
+   # binding.pry
+    expected = "woo hoo"
+    actual = @guest2.favourite_song(@room2)
+
+   # binding.pry
+    assert_equal(expected, actual)
+  end
 end

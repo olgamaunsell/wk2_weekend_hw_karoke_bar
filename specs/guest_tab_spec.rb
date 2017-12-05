@@ -1,7 +1,7 @@
 require ("MiniTest/autorun")
 require ("MiniTest/rg")
 require_relative("../guest_tab.rb")
-# require_relative("../guest.rb")
+
 
 class TestGuestTab < MiniTest::Test
 
